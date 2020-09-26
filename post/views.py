@@ -38,8 +38,9 @@ def post_detail(request, pk):
         user = request.POST['user']
         body = request.POST['comment']
         post = Post.objects.get(pk=pk)
-        comment = Comment.objects.create(user=user, body=body, post=post)
-        comment.save()
+        if body is not None:
+            comment = Comment.objects.create(user=user, body=body, post=post)
+            comment.save()
         return redirect('/')
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'post_detail.html', {'post': post})
