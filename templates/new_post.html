@@ -1,0 +1,107 @@
+{% load static %}
+{% static 'img' as baseURL%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC | New post</title>
+    <link rel="icon" href="{% static 'img/br.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .form {
+            background: #e0e0e0;
+            z-index: 1;
+            font-family: "Candara", sans-serif;
+            position: absolute;
+            padding: 0 45px 30px 45px;
+            text-align: center;
+            border-radius: 10px;
+            opacity: 0.9;
+            list-style-type: none;
+
+        }
+
+        .form .input {
+            width: 250px;
+            height: 30px;
+            border-radius: 8px;
+            margin: 30px;
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        .form .button {
+            outline: 0;
+            background: none;
+            color: black;
+            font-size: 14px;
+            text-transform: uppercase;
+            width: 150px;
+            padding: 10px;
+            margin-top: 30px;
+            margin-right: 50px;
+            border: 2.5px solid #dafaf2;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.5s;
+            transition-property: background, transform;
+        }
+
+        .form .button:hover,
+        .form .button:active,
+        .form .button:focus {
+            background: #10AC84;
+            transform: scale(1.1);
+        }
+
+        form a {
+            text-decoration: none;
+        }
+
+        .form li {
+            list-style-type: none;
+            list-style-position: outside;
+        }
+
+        .label {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body style="text-align: center;">
+    <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-8">
+            <form action="" method="POST" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <ul>
+                    <h1>Create a new post</h1>
+                    <li><label class="label">Title:</label></li>
+                    <input type="text" name="title" class="input" required><br>
+                    <li><label class="label">Body:</label></li>
+                    <textarea name="body" required cols="50" rows="10"
+                        style="margin-bottom: 30px; margin-top: 5px;"></textarea><br>
+                    <li><label class=" label" style="padding-bottom: 50px;" style="padding-top: 20px;">Upload an
+                            image:</label></li>
+                    <input type="file" name="img" accept="image/*" id="id_img" required
+                        style="padding:30px; padding-top:5px"><br>
+                    <input type="text" name="author" class="input" value={{user.first_name}}__{{user.last_name}}
+                        hidden><br>
+                    <a href="../" class="button"><span class="fa fa-arrow-circle-o-left"></span> back</a>
+                    <input type="submit" value="post" class="button">
+                </ul>
+            </form>
+
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+</body>
+
+</html>

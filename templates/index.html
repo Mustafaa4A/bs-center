@@ -1,0 +1,108 @@
+{% load static %}
+{% static 'img' as baseURL%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC | home</title>
+    <link rel="icon" href="{% static 'img/br.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .nav-item {
+            padding-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding: 40px;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h2>BS Center</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/new_post"><span class="fa fa-plus-circle"></span> New post
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about"><span class="fa fa-server"></span> About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accounts/myaccount"><span class="fa fa-user"></span>
+                            {{user.username}}</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="accounts/login"><i class="fa fa-sign-in" style="font-size:20px"></i>
+                            Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about"><span class="fa fa-server"></span> About</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div style="margin-top: 200px;">
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xl-1"></div>
+                <!-- Blog Entries Column -->
+                <div class="col-md-8">
+                    {% for post in posts %}
+                    <!-- Blog Post -->
+                    <div class="card mb-4" style="background-color: bisque;">
+                        <img class="card-img-top" src="{{post.img.url}}" alt="Card image cap" width="750px"
+                            height="300px">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ post.title}}</h2>
+                            <p class="card-text">{{post.body|linebreaks}}</p>
+                            {% if post.body %}
+                            <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer text-muted">
+                            <h6>
+                                Posted on {{post.date}} by
+                                <a href='mailto:'>{{post.author}}</a>
+                            </h6>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <h6>
+                <p class="m-0 text-center text-white">&copy; Developed by <a
+                        href="https://www.facebook.com/AscadAbubakar" target="_blank">Mustafa
+                        Abubakar
+                        Abdullahi</a></p>
+            </h6>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>
