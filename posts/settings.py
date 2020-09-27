@@ -92,8 +92,11 @@ WSGI_APPLICATION = 'posts.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbmkubh3192hfr',
+        'USER': 'mcmyrgjokvyhhp',
+        'PASSWORD': 'ecdefa3ed072fa873d4b76f9480de02b5eb1dccb5135e662fe8c6658971a7bf9',
+        'HOST': 'ec2-23-23-242-234.compute-1.amazonaws.com'
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
