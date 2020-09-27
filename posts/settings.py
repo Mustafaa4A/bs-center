@@ -90,12 +90,14 @@ WSGI_APPLICATION = 'posts.wsgi.application'
 #         'HOST': 'localhost'
 #     }
 # }
-
-# new
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgresql',
+    }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
