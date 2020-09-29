@@ -1,107 +1,184 @@
 {% load static %}
 {% static 'img' as baseURL%}
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en-us">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BC | New post</title>
+    <title>BC | Add post</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
     <link rel="icon" href="{% static 'img/br.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/nav_sidebar.css' %}">
+    <script src="{% static 'static/admin/js/nav_sidebar.js' %}" defer></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .form {
-            background: #e0e0e0;
-            z-index: 1;
-            font-family: "Candara", sans-serif;
-            position: absolute;
-            padding: 0 45px 30px 45px;
-            text-align: center;
-            border-radius: 10px;
-            opacity: 0.9;
-            list-style-type: none;
 
-        }
+    <script src="{% static 'admin/jsi18n/' %}"></script>
+    <script src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'admin/js/calendar.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+    <script src="{% static 'admin/js/admin/DateTimeShortcuts.js' %}"></script>
+    <script src="{% static 'admin/js/core.js' %}"></script>
+    <script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
+    <script src="{% static 'admin/js/actions.min.js' %}"></script>
+    <script src="{% static 'admin/js/urlify.js' %}"></script>
+    <script src="{% static 'admin/js/prepopulate.min.js' %}"></script>
+    <script src="{% static 'admin/js/vendor/xregexp/xregexp.min.js' %}"></script>
 
-        .form .input {
-            width: 250px;
-            height: 30px;
-            border-radius: 8px;
-            margin: 30px;
-            margin-left: 10px;
-            margin-top: 5px;
-        }
 
-        .form .button {
-            outline: 0;
-            background: none;
-            color: black;
-            font-size: 14px;
-            text-transform: uppercase;
-            width: 150px;
-            padding: 10px;
-            margin-top: 30px;
-            margin-right: 50px;
-            border: 2.5px solid #dafaf2;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.5s;
-            transition-property: background, transform;
-        }
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/responsive.css' %}">
 
-        .form .button:hover,
-        .form .button:active,
-        .form .button:focus {
-            background: #10AC84;
-            transform: scale(1.1);
-        }
 
-        form a {
-            text-decoration: none;
-        }
-
-        .form li {
-            list-style-type: none;
-            list-style-position: outside;
-        }
-
-        .label {
-            text-align: right;
-        }
-    </style>
+    <meta name="robots" content="NONE,NOARCHIVE">
 </head>
 
-<body style="text-align: center;">
-    <div class="row">
-        <div class="col-2">
+
+<body class=" app-post model-post change-form" data-admin-utc-offset="0">
+
+
+    <div class="content">
+
+
+
+        <!-- Content -->
+        <div id="content" class="colM">
+
+            <h1 style="font-weight: bold;">Add post</h1>
+            <div id="content-main">
+
+
+
+                <form enctype="multipart/form-data" method="POST" id="post_form" novalidate><input type="hidden">
+                    {% csrf_token %}
+                    <div>
+                        <fieldset class="module aligned ">
+
+
+
+                            <div class="form-row field-title">
+
+
+                                <div>
+
+
+                                    <label class="required" for="id_title">Title:</label>
+
+                                    <input type="text" name="title" class="vTextField" maxlength="100" required
+                                        id="id_title">
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-row field-date">
+
+
+
+
+                                <div class="form-row field-body">
+
+
+                                    <div>
+
+
+                                        <label class="required" for="id_body">Body:</label>
+
+                                        <textarea name="body" cols="40" rows="10" class="vLargeTextField" required
+                                            id="id_body">
+</textarea>
+
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row field-img">
+
+
+                                    <div>
+
+
+                                        <label class="required" for="id_img">Img:</label>
+
+                                        <input type="file" name="img" accept="image/*" required id="id_img">
+
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row field-author">
+
+
+                                    <div>
+
+
+                                        <!-- Auther -->
+
+                                        <input type="text" name="author" class="vTextField" maxlength="100" required
+                                            id="id_author" value={{user.first_name}}__{{user.last_name}} hidden>
+
+
+
+                                    </div>
+
+                                </div>
+
+                        </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="submit-row">
+                            <a href="../" class="button"><span class="fa fa-arrow-circle-o-left"></span> back</a>
+                            <input type="submit" value="Back" name="_addanother"
+                                style="background-color: rgb(2, 122, 122);">
+                            <input type="submit" value="Save Post" name="_continue">
+
+
+                        </div>
+
+
+
+                        <script id="django-admin-form-add-constants" src="{% static 'admin/js/change_form.js' %}"
+                            data-model-name="post" async>
+                        </script>
+
+
+
+
+                        <script id="django-admin-prepopulated-fields-constants"
+                            src="{% static 'admin/js/prepopulate_init.js' %}" data-prepopulated-fields="[]">
+                        </script>
+
+
+                    </div>
+                </form>
+            </div>
+
+
 
         </div>
-        <div class="col-8">
-            <form action="" method="POST" class="form" enctype="multipart/form-data">
-                {% csrf_token %}
-                <ul>
-                    <h1>Create a new post</h1>
-                    <li><label class="label">Title:</label></li>
-                    <input type="text" name="title" class="input" required><br>
-                    <li><label class="label">Body:</label></li>
-                    <textarea name="body" required cols="50" rows="10"
-                        style="margin-bottom: 30px; margin-top: 5px;"></textarea><br>
-                    <li><label class=" label" style="padding-bottom: 50px;" style="padding-top: 20px;">Upload an
-                            image:</label></li>
-                    <input type="file" name="img" accept="image/*" id="id_img" required
-                        style="padding:30px; padding-top:5px"><br>
-                    <input type="text" name="author" class="input" value={{user.first_name}}__{{user.last_name}}
-                        hidden><br>
-                    <a href="../" class="button"><span class="fa fa-arrow-circle-o-left"></span> back</a>
-                    <input type="submit" value="post" class="button">
-                </ul>
-            </form>
-
-        </div>
-        <div class="col-2">
-
-        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
     </div>
+    <!-- END Container -->
 </body>
 
 </html>
