@@ -51,7 +51,7 @@
 
 
 
-                <form enctype="multipart/form-data" method="POST" id="post_form" novalidate><input type="hidden">
+                <form enctype="multipart/form-data" method="POST" id="post_form">
                     {% csrf_token %}
                     <div>
                         <fieldset class="module aligned ">
@@ -106,7 +106,7 @@
 
                                         <label class="required" for="id_img">Img:</label>
 
-                                        <input type="file" name="img" accept="image/*" required id="id_img">
+                                        <input type="file" name="img" accept="image/*" required>
 
 
 
