@@ -8,7 +8,6 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     date = models.DateTimeField(default=timezone.now)
     body = models.TextField()
-    # slug = models.SlugField(unique=True)
     img = models.ImageField(upload_to='pics')
     author = models.CharField(max_length=100)
 
